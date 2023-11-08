@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+        <title>Flask Project</title>
+    </head>
+    <body>
+        {% block body %}{% endblock body %}
+    </body>
+    <!-- Mensagens flash -->
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+        <script>
+            window.onload = function () {
+                alert("{{ messages[0] }}");
+            };
+        </script>
+    {% endif %}
+    {% endwith %}
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+{% block body %}
+<div>
+	<table>
+		<thead>
+			<tr>
+				<th colspan="4">Cargo</th>
+			</tr>
+			<tr>
+				<form
+					method="post"
+					action="{{ url_for('inserir_cargo') }}">
+					<th>
+						Cargo:
+						<input
+							type="text"
+							name="cargo_nome"
+							required />
+					</th>
+					<th>
+						Setor:
+						<select
+							name="setor_nome"
+							required>
+							<option value="">Select...</option>
+							{% for linha in setor %}
+                                <option value="{{ linha.nome }}">{{ linha.nome }}</option>
+							{% endfor %}
+						</select>
+					</th>
+					<th colspan="2">
+						<button type="submit">Adicionar</button>
+					</th>
+				</form>
+			</tr>
+			<tr>
+				<th>ID</th>
+				<th>Nome</th>
+				<th>Setor</th>
+				<th></th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for linha in cargo %}
+			<tr>
+				<td>{{ linha.id }}</td>
+				<td>{{ linha.nome }}</td>
+				<td>{{ linha.setor.nome }}</td>
+				<td>
+					<a
+						href="/deletar_cargo/{{ linha.id }}"
+						onclick="return confirm('Tem certeza que deseja remover?')">
+						<button>Remover</button>
+					</a>
+				</td>
+			</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+</div>
+{% endblock %}

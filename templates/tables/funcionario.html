@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+{% block body %}
+<div>
+	<table>
+		<thead>
+			<tr>
+				<th colspan="8">Funcionário</th>
+			</tr>
+			<tr>
+				<form
+					method="post"
+					action="{{ url_for('inserir_funcionario') }}">
+					<th>
+						Nome:
+						<input
+							type="text"
+							name="funcionario_nome"
+							required />
+					</th>
+					<th>
+						Sobrenome:
+						<input
+							type="text"
+							name="funcionario_sobrenome"
+							required />
+					</th>
+					<th>
+						Data de Admissão:
+						<input
+							type="date"
+							name="funcionario_data_admissao"
+							required />
+					</th>
+					<th>
+						Status:<br />
+						<label>
+							<input
+								type="radio"
+								name="funcionario_status"
+								value="True"
+								required />
+							Ativo
+						</label>
+						<br />
+						<label>
+							<input
+								type="radio"
+								name="funcionario_status"
+								value="False"
+								required />
+							Desligado
+						</label>
+					</th>
+					<th>
+						Cargo:
+						<select
+							name="funcionario_cargo_nome"
+							required>
+							<option value="">Select...</option>
+							{% for linha in cargo %}
+							<option value="{{ linha.nome }}">{{ linha.nome }}</option>
+							{% endfor %}
+						</select>
+					</th>
+					<th>
+						Setor:
+						<select
+							name="funcionario_setor_nome"
+							required>
+							<option value="">Select...</option>
+							{% for linha in setor %}
+							<option value="{{ linha.nome }}">{{ linha.nome }}</option>
+							{% endfor %}
+						</select>
+					</th>
+					<th colspan="2">
+						<button type="submit">Adicionar</button>
+					</th>
+				</form>
+			</tr>
+			<tr>
+				<th>ID</th>
+				<th>Nome</th>
+				<th>Sobrenome</th>
+				<th>Data de Admissão</th>
+				<th>Status</th>
+				<th>Cargo</th>
+				<th>Setor</th>
+				<th></th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for linha in funcionario %}
+			<tr>
+				<td>{{ linha.id }}</td>
+				<td>{{ linha.nome }}</td>
+				<td>{{ linha.sobrenome }}</td>
+				<td>{{ linha.data_admissao }}</td>
+				<td>{{ linha.status }}</td>
+				<td>{{ linha.cargo.nome }}</td>
+				<td>{{ linha.setor.nome }}</td>
+				<td>
+					<a
+						href="/deletar_funcionario/{{ linha.id }}"
+						onclick="return confirm('Tem certeza que deseja remover?')">
+						<button>Remover</button>
+					</a>
+				</td>
+			</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+</div>
+{% endblock %}
