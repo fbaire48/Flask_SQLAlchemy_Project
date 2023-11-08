@@ -1,5 +1,5 @@
 # 1. Preview:
-![Imagem 1](1.png)
+![Imagem 1](1.jpg)
 
 ***
 # 2. Passo a Passo:
